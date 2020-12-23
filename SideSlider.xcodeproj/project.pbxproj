@@ -13,6 +13,8 @@
 		CE1CEFF42588B0A000D8BB40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF22588B0A000D8BB40 /* Main.storyboard */; };
 		CE1CEFF62588B0A000D8BB40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */; };
 		CE1CEFF92588B0A000D8BB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF72588B0A000D8BB40 /* LaunchScreen.storyboard */; };
+		CE30B3FE2588B5B000DA5232 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30B3FD2588B5B000DA5232 /* SliderView.swift */; };
+		CE30B4012588B86800DA5232 /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30B4002588B86800DA5232 /* OptionLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE1CEFF82588B0A000D8BB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1CEFFA2588B0A000D8BB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE30B3FD2588B5B000DA5232 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		CE30B4002588B86800DA5232 /* OptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				CE1CEFEC2588B0A000D8BB40 /* AppDelegate.swift */,
 				CE1CEFEE2588B0A000D8BB40 /* SceneDelegate.swift */,
 				CE1CEFF02588B0A000D8BB40 /* ViewController.swift */,
+				CE30B3FD2588B5B000DA5232 /* SliderView.swift */,
+				CE30B4002588B86800DA5232 /* OptionLabel.swift */,
 				CE1CEFF22588B0A000D8BB40 /* Main.storyboard */,
 				CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */,
 				CE1CEFF72588B0A000D8BB40 /* LaunchScreen.storyboard */,
@@ -138,6 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1CEFF12588B0A000D8BB40 /* ViewController.swift in Sources */,
+				CE30B3FE2588B5B000DA5232 /* SliderView.swift in Sources */,
+				CE30B4012588B86800DA5232 /* OptionLabel.swift in Sources */,
 				CE1CEFED2588B0A000D8BB40 /* AppDelegate.swift in Sources */,
 				CE1CEFEF2588B0A000D8BB40 /* SceneDelegate.swift in Sources */,
 			);
