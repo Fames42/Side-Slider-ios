@@ -43,7 +43,7 @@ class SliderView: UIView {
     var scrollDelegate: SliderViewScrolled?
     var minWidthConstraint: NSLayoutConstraint!
     var maxWidthConstraint: NSLayoutConstraint!
-    
+
     func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 10
@@ -131,9 +131,8 @@ class SliderView: UIView {
                     self.maxSize = self.labels.map({$0.intrinsicContentSize.width}).max() ?? 150.0
                     self.maxWidthConstraint = self.widthAnchor.constraint(equalToConstant: self.maxSize)
                 }
-                
-                self.center.x -= 90
                 self.maxWidthConstraint.isActive = true
+                self.center.x -= 90
                 self.layoutIfNeeded()
             }, completion: nil)
     }
@@ -208,9 +207,6 @@ extension SliderView: UnselectLabels {
         }
     }
     
-    func unselectShowAll() {
-        // FIXME: new protocol?
-    }
 }
 
 extension SliderView: UIGestureRecognizerDelegate {

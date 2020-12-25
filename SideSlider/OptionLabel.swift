@@ -69,7 +69,6 @@ import UIKit
     }
     
     @objc func didTapped() {
-        print("WTF")
         isSelected = !isSelected
     }
 }

@@ -11,9 +11,12 @@ class ViewController: UIViewController {
 
     let slider = SliderView(frame: CGRect.zero)
     var scrollTask: DispatchWorkItem?
+    let biscay = UIColor(red: 39.0/255, green: 65.0/255, blue: 88.0/255, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = biscay
         
         //MARK: sliderView
         slider.scrollDelegate = self
