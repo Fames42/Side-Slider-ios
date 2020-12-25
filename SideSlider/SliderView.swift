@@ -10,6 +10,8 @@ import Foundation
 
 protocol SliderViewScrolled {
     func scroll(to section: String, with delay: Bool)
+    func sliderExpanded()
+    func sliderCollapsed()
 }
 
 protocol UnselectLabels {
@@ -41,8 +43,6 @@ class SliderView: UIView {
     var maxSize: CGFloat = 0.0
     var minSize: CGFloat = 30.0
     var scrollDelegate: SliderViewScrolled?
-    var minWidthConstraint: NSLayoutConstraint!
-    var maxWidthConstraint: NSLayoutConstraint!
 
     func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +68,7 @@ class SliderView: UIView {
             tap.label = label
             tap.unselectDelegate = self
             label.addGestureRecognizer(tap)
+            label.textAlignment = .left
 
             label.font = UIFont(name: "GillSansProCyrillic-Medium", size: fontSize + 1.0) ?? UIFont.systemFont(ofSize: fontSize)
             label.topInset = 12
@@ -97,42 +98,43 @@ class SliderView: UIView {
             
             prevLabel = label
         }
-        minSize = (labels.map({$0.intrinsicContentSize.width}).max() ?? 30.0) + 10.0
-        minWidthConstraint = self.widthAnchor.constraint(equalToConstant: minSize)
+        minSize = (labels.map({$0.intrinsicContentSize.width}).max() ?? 30.0)
+        
+        let longest = labels.map({$0.fullText}).max(by: {$0.count < $1.count})
+        labels[0].text = longest
+        maxSize = labels[0].intrinsicContentSize.width
+        labels[0].text = String(labels[0].fullText.first ?? "0")
     }
     
     func collapse() {
-        self.backgroundColor = .clear
-        self.maxWidthConstraint.isActive = false
+        for label in self.labels {
+            label.text = String(label.fullText.first ?? "0")
+            label.textAlignment = .left
+        }
+        scrollDelegate?.sliderCollapsed()
 
-        UIView.animate(withDuration: 0.1,
+        UIView.animate(withDuration: 0.2,
             animations: {
-                for label in self.labels {
-                    label.text = String(label.fullText.first ?? "0")
-                }
-                self.minWidthConstraint.isActive = true
+                self.center.x += self.maxSize/2 - self.minSize / 2
                 self.layoutIfNeeded()
             }, completion: {_ in
+                    self.backgroundColor = .clear
             })
-        
+
     }
     
     func expand() {
         self.backgroundColor = .white
+        for label in self.labels {
+            label.text = label.fullText
+            label.textAlignment = .center
+        }
         
-        self.minWidthConstraint.isActive = false
-        print(self.minWidthConstraint.isActive)
+        self.scrollDelegate?.sliderExpanded()
+        
         UIView.animate(withDuration: 0.2,
             animations: {
-                for label in self.labels {
-                    label.text = label.fullText
-                }
-                if self.maxSize == 0.0 {
-                    self.maxSize = self.labels.map({$0.intrinsicContentSize.width}).max() ?? 150.0
-                    self.maxWidthConstraint = self.widthAnchor.constraint(equalToConstant: self.maxSize)
-                }
-                self.maxWidthConstraint.isActive = true
-                self.center.x -= 90
+                self.center.x -= self.maxSize/2 - self.minSize / 2
                 self.layoutIfNeeded()
             }, completion: nil)
     }

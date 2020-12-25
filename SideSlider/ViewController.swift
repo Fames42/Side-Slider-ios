@@ -12,7 +12,8 @@ class ViewController: UIViewController {
     let slider = SliderView(frame: CGRect.zero)
     var scrollTask: DispatchWorkItem?
     let biscay = UIColor(red: 39.0/255, green: 65.0/255, blue: 88.0/255, alpha: 1.0)
-
+    var leadingAnchor: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,12 +21,14 @@ class ViewController: UIViewController {
         
         //MARK: sliderView
         slider.scrollDelegate = self
-        self.slider.sections = ["Check", "That", "View", "Thoroughly"]
+        self.slider.sections = ["Check", "That", "View", "Thoroughly", "ERULAN", "AND", "DAULET"]
         self.view.addSubview(self.slider)
         let margins = view.layoutMarginsGuide
-        slider.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
         slider.heightAnchor.constraint(equalToConstant: slider.getContentHeight()).isActive = true
-        slider.minWidthConstraint.isActive = true
+        leadingAnchor = slider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width - slider.minSize)
+        leadingAnchor.isActive = true
+        slider.widthAnchor.constraint(equalToConstant: slider.maxSize).isActive = true
         slider.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
     }
 
@@ -42,6 +45,17 @@ extension ViewController: SliderViewScrolled {
         }
         self.scrollTask = task
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (delay ? 0.4 : 0.0), execute: task)
+    }
+    
+    func sliderExpanded() {
+        leadingAnchor.constant = view.bounds.width - slider.maxSize
+    }
+    
+    func sliderCollapsed() {
+        leadingAnchor.constant = view.bounds.width - slider.minSize
+        UIView.animate(withDuration: 0.1, animations: {
+            self.slider.layoutIfNeeded()
+        })
     }
 }
 
