@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     var scrollTask: DispatchWorkItem?
     let biscay = UIColor(red: 39.0/255, green: 65.0/255, blue: 88.0/255, alpha: 1.0)
     var leadingAnchor: NSLayoutConstraint!
+    var menu: [MenuCategory] = []
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: SliderViewScrolled {
+extension ViewController: SliderViewDelegate {
     func scroll(to section: String, with delay: Bool) {
         self.scrollTask?.cancel()
         let task = DispatchWorkItem {
@@ -59,3 +61,16 @@ extension ViewController: SliderViewScrolled {
     }
 }
 
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menu[section].dishes.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return menu.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+}

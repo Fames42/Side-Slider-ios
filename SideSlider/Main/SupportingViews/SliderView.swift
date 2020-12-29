@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-protocol SliderViewScrolled {
+protocol SliderViewDelegate {
     func scroll(to section: String, with delay: Bool)
     func sliderExpanded()
     func sliderCollapsed()
@@ -42,7 +42,7 @@ class SliderView: UIView {
     var offset: CGFloat = 15.0
     var maxSize: CGFloat = 0.0
     var minSize: CGFloat = 30.0
-    var scrollDelegate: SliderViewScrolled?
+    var scrollDelegate: SliderViewDelegate?
 
     func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
