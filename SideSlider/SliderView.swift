@@ -107,6 +107,8 @@ class SliderView: UIView {
     }
     
     func collapse() {
+        self.backgroundColor = .clear
+
         for label in self.labels {
             label.text = String(label.fullText.first ?? "0")
             label.textAlignment = .left
@@ -118,7 +120,7 @@ class SliderView: UIView {
                 self.center.x += self.maxSize/2 - self.minSize / 2
                 self.layoutIfNeeded()
             }, completion: {_ in
-                    self.backgroundColor = .clear
+                // do something
             })
 
     }
@@ -134,7 +136,7 @@ class SliderView: UIView {
         
         UIView.animate(withDuration: 0.2,
             animations: {
-                self.center.x -= self.maxSize/2 - self.minSize / 2
+                self.center.x -= self.maxSize - self.minSize
                 self.layoutIfNeeded()
             }, completion: nil)
     }
