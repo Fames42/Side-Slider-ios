@@ -71,6 +71,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! DishTableViewCell
+        cell.dish = menu[indexPath.section].dishes[indexPath.row]
+        return cell
     }
 }
