@@ -17,6 +17,7 @@
 		CE1CEFF42588B0A000D8BB40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF22588B0A000D8BB40 /* Main.storyboard */; };
 		CE1CEFF62588B0A000D8BB40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */; };
 		CE1CEFF92588B0A000D8BB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1CEFF72588B0A000D8BB40 /* LaunchScreen.storyboard */; };
+		CE2E2BAF25A871CC0040F281 /* restaurant.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE2E2BAE25A871CC0040F281 /* restaurant.txt */; };
 		CE30B3FE2588B5B000DA5232 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30B3FD2588B5B000DA5232 /* SliderView.swift */; };
 		CE30B4012588B86800DA5232 /* OptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE30B4002588B86800DA5232 /* OptionLabel.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE1CEFF82588B0A000D8BB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1CEFFA2588B0A000D8BB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2E2BAE25A871CC0040F281 /* restaurant.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = restaurant.txt; sourceTree = "<group>"; };
 		CE30B3FD2588B5B000DA5232 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		CE30B4002588B86800DA5232 /* OptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +103,7 @@
 				CE1CEFF22588B0A000D8BB40 /* Main.storyboard */,
 				CE1CEFF52588B0A000D8BB40 /* Assets.xcassets */,
 				CE1CEFF72588B0A000D8BB40 /* LaunchScreen.storyboard */,
+				CE2E2BAE25A871CC0040F281 /* restaurant.txt */,
 				CE1CEFFA2588B0A000D8BB40 /* Info.plist */,
 			);
 			path = SideSlider;
@@ -174,6 +177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2E2BAF25A871CC0040F281 /* restaurant.txt in Resources */,
 				CE1CEFF92588B0A000D8BB40 /* LaunchScreen.storyboard in Resources */,
 				CE19E035259AF09600350E8F /* DishTableViewCell.xib in Resources */,
 				CE1CEFF62588B0A000D8BB40 /* Assets.xcassets in Resources */,

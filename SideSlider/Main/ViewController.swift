@@ -18,6 +18,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        initializeData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -126,6 +132,53 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIScrollVi
         print(headerPositions)
     }
 
+}
+
+extension ViewController {
+    func initializeData() {
+        if let string = loadFileAsString() {
+            let data = Data(string.utf8)
+            do {
+                if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [Dictionary<String,Any>] {
+                    let menu = (jsonArray[0]["menu"] as! Dictionary<String, Any>)["categories"] as! [Dictionary<String, Any>]
+                    print(menu)
+                    var dishTypes: [MenuCategory] = []
+                    for dishType in menu {
+                        let name = dishType["name"] as! String
+                        let description = dishType["description"] as! String
+                        let dishesJSON = dishType["dishes"] as! [Dictionary<String, Any>]
+                        var dishes: [Dish] = []
+                        for dish in dishesJSON {
+                            let name = dish["name"] as! String
+                            let description = dish["description"] as! String
+                            let price = dish["price"] as! String
+                            dishes.append(Dish(name: name, price: price, description: description, tags: [], id: nil))
+                        }
+                        dishTypes.append(MenuCategory(name: name, description: description, dishes: dishes))
+                    }
+                    self.menu = dishTypes
+                    tableView.reloadData()
+                } else {
+                    print("Failed to load: bad json")
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func loadFileAsString() -> String? {
+        if let path = Bundle.main.path(forResource: "restaurant", ofType: "txt") {
+            let fm = FileManager()
+            let exists = fm.fileExists(atPath: path)
+            if(exists){
+                let content = fm.contents(atPath: path)
+                let contentAsString = String(data: content!, encoding: String.Encoding.utf8)
+                return contentAsString
+            }
+        }
+        return nil
+    }
 }
 
 extension String {
