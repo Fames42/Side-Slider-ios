@@ -13,16 +13,10 @@ class ViewController: UIViewController {
     var scrollTask: DispatchWorkItem?
     let biscay = UIColor(red: 47.0/255, green: 77.0/255, blue: 106.0/255, alpha: 1.0)
     var leadingAnchor: NSLayoutConstraint!
-    var menu: [MenuCategory] = [MenuCategory(name: "Sides", description: "Sides", dishes: [Dish(name: "Check", price: "$4.3", description: "Checkcheckcheck", tags: [], id: nil)])]
+    var menu: [MenuCategory] = []
     var headerPositions: [CGFloat] = []
 
     @IBOutlet weak var tableView: UITableView!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        initializeData()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +25,13 @@ class ViewController: UIViewController {
         
         tableView.register(UINib(nibName: "DishTableViewCell", bundle: nil), forCellReuseIdentifier: "CustomCell")
 
+        //MARK: initializeData
+        initializeData()
+        calculateHeaderPositions()
+        
         //MARK: sliderView
         slider.scrollDelegate = self
-        self.slider.sections = ["Check", "That", "View", "Thoroughly", "ERULAN", "AND", "DAULET"]
+        self.slider.sections = menu.map({$0.name!})
         self.view.addSubview(self.slider)
         let margins = view.layoutMarginsGuide
         
@@ -109,16 +107,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIScrollVi
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if tableView.isDragging {
-//            let offset = scrollView.contentOffset.y
-//            let indices = 0...(headerPositions.count - 1)
-//            let section = zip(headerPositions.map({abs($0 - offset)}), indices).min(by: {$0.0 < $1.0})!.1
-//            if headerPositions[section] - offset <= tableView.bounds.height/2 {
-//                self.slider.unselectRest(self.slider.labels[section])
-//            } else if section != 0 {
-//                self.slider.unselectRest(self.slider.labels[section - 1])
-//            }
-//        }
+        if tableView.isDragging {
+            let offset = scrollView.contentOffset.y
+            let indices = 0...(headerPositions.count - 1)
+            let section = zip(headerPositions.map({abs($0 - offset)}), indices).min(by: {$0.0 < $1.0})!.1
+            if headerPositions[section] - offset <= tableView.bounds.height/2 {
+                self.slider.unselectRest(self.slider.labels[section])
+            } else if section != 0 {
+                self.slider.unselectRest(self.slider.labels[section - 1])
+            }
+        }
     }
     
     func calculateHeaderPositions() {
@@ -129,7 +127,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UIScrollVi
         }
         headerPositions = headerPositions
             .reduce(into: []) { $0.append(($0.last ?? 0) + $1) }
-        print(headerPositions)
     }
 
 }
@@ -141,7 +138,6 @@ extension ViewController {
             do {
                 if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [Dictionary<String,Any>] {
                     let menu = (jsonArray[0]["menu"] as! Dictionary<String, Any>)["categories"] as! [Dictionary<String, Any>]
-                    print(menu)
                     var dishTypes: [MenuCategory] = []
                     for dishType in menu {
                         let name = dishType["name"] as! String
@@ -156,7 +152,7 @@ extension ViewController {
                         }
                         dishTypes.append(MenuCategory(name: name, description: description, dishes: dishes))
                     }
-                    self.menu = dishTypes
+                    self.menu = Array(dishTypes[0...4])
                     tableView.reloadData()
                 } else {
                     print("Failed to load: bad json")

@@ -61,7 +61,7 @@ class DishTableViewCell: UITableViewCell {
         innerView.addSubview(dishName)
         dishName.translatesAutoresizingMaskIntoConstraints = false
         dishName.topAnchor.constraint(equalTo: innerView.topAnchor, constant: 10).isActive = true
-        dishName.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -15).isActive = true
+        dishName.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -25).isActive = true
         dishName.leadingAnchor.constraint(equalTo: innerView.leadingAnchor, constant: 15).isActive = true
         
         //MARK: dishPrice
@@ -75,7 +75,7 @@ class DishTableViewCell: UITableViewCell {
         dishDescription.translatesAutoresizingMaskIntoConstraints = false
         dishDescription.leadingAnchor.constraint(equalTo: innerView.leadingAnchor, constant: 15).isActive = true
         dishDescription.topAnchor.constraint(equalTo: dishName.bottomAnchor, constant: 15).isActive = true
-        dishDescription.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -15).isActive = true
+        dishDescription.trailingAnchor.constraint(equalTo: innerView.trailingAnchor, constant: -25).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
